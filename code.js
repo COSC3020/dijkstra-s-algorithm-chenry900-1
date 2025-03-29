@@ -1,17 +1,14 @@
-function dijkstra(graph, sourceNode) {
         
-    
+class DijkstraNode {
     constructor (node, distance) {
-        var distance;
-        var currentNode;
-        this.currentnode = node;
+        this.node = node;
         this.distance = distance;
     }
     Node() {
-        return currentNode;
+        return this.node;
     }
     distance() {
-        return distance;
+        return this.distance;
     }
     newDistance(distance) {
         this.distance = distance;
@@ -21,50 +18,33 @@ function dijkstra(graph, sourceNode) {
 
 class PriorityQueue {
     constructor () {
-        var queue = [];
-        var number = 0;
+        this.queue = [];
     }
 
     add(DijkstraNode) {
-        number++;
-        queue[number] = DijkstraNode.distance();
-        queue[number] = [];
-        queue[number].push(DijkstraNode.Node());
-        for (var i = 0; i < number; i++) {
-            if (queue[number] > queue[i]) {
-                var swap = queue[number];
-                var nodeSwap = queue[number][0];
-                for (var n = number - 1; n > i; n--) {
-                    queue[(n+1)] = queue[n];
-                    queue[(n+1)][0] = queue[n][0];
-                }
-                queue[i] = swap;
-                queue[i][0] = nodeSwap;
-            }
-        }
+        this.queue.push(dijkstraNode);
+
+        this.queue.sort((a, b) => a.getDistance() - b.getDistance());
     }
     poll() {
-        return queue.pop();
+        return this.queue.shift();
     }
     isEmpty() {
-        if (queue.length == 0)
-            return true;
-        else
-            return false;
+        return this.queue.length == 0;
     }
     
 
 }
 
 function dijkstra(graph, sourceNode) {
-    var[] Dijkstra = new var[graph.length];
-    boolean[] visited = new boolean[graph.length];
-    var inf = 999;
-    PriorityQueue<DijkstraNode> priority = new PriorityQueue<>(node, node.distance);
+    const inf = Infinity;
+    const Dijkstra = [];
+    const visited = [];
+    const priorityQueue = new PriorityQueue();
 
     for (var i = 0; i < graph.length; i++) {
         if (i == sourceNode){
-            Dijkstra[i] = new DijkstraNode(sourceNode, inf);
+            Dijkstra[i] = new DijkstraNode(i, 0);
             visited[i] = true;
         }
         else {
@@ -72,22 +52,22 @@ function dijkstra(graph, sourceNode) {
             visited[i] = false;
         }
     }
-    priority.add(Dijkstra[sourceNode]);
+    priorityQueue.add(Dijkstra[sourceNode]);
 
-    while (!priority.isEmpty()) {
-        DijkstraNode check = priority.poll();
+    while (!priorityQueue.isEmpty()) {
+        var currentNode = priorityQueue.poll();
         for (var i = 0; i < graph.length; i++) {
-            if (graph[check.Node()][i] > 0) {
-                var newdist = check.distance() + graph[check.Node()][i];
-                if (newdist < Dijkstra[check.Node()].distnace()) {
-                    Dijkstra[check.Node()].newDistance(newdist);
+            if (graph[currentNode.Node()][i] > 0) {
+                var newdist = currentNode.distance() + graph[currentNode.Node()][i];
+                if (newdist < Dijkstra[i].distnace()) {
+                    Dijkstra[i].newDistance(newdist);
                     if (!visited[i]) {
-                        priority.add(Dijkstra[i]);
+                        priorityQueue.add(Dijkstra[i]);
                         visited[i] = true;
                     }
                 }
             }
         }
     }
-    return DijMatrix;
+    return DijMatrix.map(node => node.distance());
 }
