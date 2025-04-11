@@ -2,16 +2,16 @@
 class DijkstraNode {
     constructor (node, distance) {
         this.node = node;//it fixed the constructor and node by using this.node I then asked it to teach me how the this.something worked and implemented it in the rest of my code.
-        this.getDistance = distance;
+        this.distance = distance;
     }
     Node() {
         return this.node;
     }
     getDistance() {
-        return this.getDistance;
+        return this.distance;
     }
     newDistance(dist) {
-        this.getDistance = dist;
+        this.distance = dist;
     }
 
 }
