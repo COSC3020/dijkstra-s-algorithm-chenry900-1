@@ -24,5 +24,8 @@ inefficient.
 What is the big $\Theta$ complexity of your implementation? Add your
 answer, including your reasoning, to this markdown file.
 
-code used from my submission last semester
+The code will have to run through every node in the graph meaning that we will have O(V).
+Then we have my sort fuction for the priority queue assuming worse case it would have to reorganize every node in the graph every time adding another O(V). My add fuction has to add every node to the priority queue so we add another O(V). Finally it needs to add every edge to the distances to find the shortest path so you get O(E). Making O(|V|^2 + |E| x |V|).
+
+code used from my submission last semester I used copiolot to make the test code and help me learn a few lines to do what I needed to do in java. 
 I certify that I have listed all sources used to complete this exercise, including the use of any Large Language Models. All of the work is my own, except where stated otherwise. I am aware that plagiarism carries severe penalties and that if plagiarism is suspected, charges may be filed against me without prior notice.
