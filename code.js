@@ -68,7 +68,7 @@ function dijkstra(graph, sourceNode) {
             }
         }
     }
-    return DijMatrix.map(node => node.getDistance());
+    return Dijkstra.map(node => node.getDistance()); //copilot helped me with this line
 }
 
 
