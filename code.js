@@ -10,8 +10,8 @@ class DijkstraNode {
     distance() {
         return this.distance;
     }
-    newDistance(distance) {
-        this.distance = distance;
+    newDistance(dist) {
+        this.distance = dist;
     }
 
 }
