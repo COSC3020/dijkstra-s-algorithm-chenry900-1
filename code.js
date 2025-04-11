@@ -7,11 +7,11 @@ class DijkstraNode {
     Node() {
         return this.node;
     }
-    distance() {
-        return this.distance;
+    getDistance() {
+        return this.getDistance;
     }
     newDistance(dist) {
-        this.distance = dist;
+        this.getDistance = dist;
     }
 
 }
@@ -23,7 +23,7 @@ class PriorityQueue {
 
     add(dijkstraNode) {
         this.queue.push(dijkstraNode);
-        this.queue.sort((a, b) => a.distance() - b.distance());
+        this.queue.sort((a, b) => a.getDistance() - b.getDistance());
     }
     poll() {
         return this.queue.shift();
@@ -57,8 +57,8 @@ function dijkstra(graph, sourceNode) {
         var currentNode = priorityQueue.poll();
         for (var i = 0; i < graph.length; i++) {
             if (graph[currentNode.Node()][i] > 0) {
-                var newdist = currentNode.distance() + graph[currentNode.Node()][i];
-                if (newdist < Dijkstra[i].distnace()) {
+                var newdist = currentNode.getDistance() + graph[currentNode.Node()][i];
+                if (newdist < Dijkstra[i].getDistnace()) {
                     Dijkstra[i].newDistance(newdist);
                     if (!visited[i]) {
                         priorityQueue.add(Dijkstra[i]);
@@ -68,7 +68,7 @@ function dijkstra(graph, sourceNode) {
             }
         }
     }
-    return DijMatrix.map(node => node.distance());
+    return DijMatrix.map(node => node.getDistance());
 }
 
 
