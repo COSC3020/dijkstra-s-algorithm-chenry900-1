@@ -71,3 +71,6 @@ function dijkstra(graph, sourceNode) {
     }
     return DijMatrix.map(node => node.distance());
 }
+
+
+module.exports = { dijkstra }; //copilot said i needed to add this at the bottom to get the test code working properly 
