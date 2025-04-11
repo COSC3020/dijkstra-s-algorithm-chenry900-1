@@ -21,9 +21,8 @@ class PriorityQueue {
         this.queue = [];
     }
 
-    add(DijkstraNode) {
+    add(dijkstraNode) {
         this.queue.push(dijkstraNode);
-
         this.queue.sort((a, b) => a.getDistance() - b.getDistance());
     }
     poll() {
