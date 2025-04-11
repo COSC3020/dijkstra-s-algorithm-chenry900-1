@@ -58,7 +58,7 @@ function dijkstra(graph, sourceNode) {
         for (var i = 0; i < graph.length; i++) {
             if (graph[currentNode.Node()][i] > 0) {
                 var newdist = currentNode.getDistance() + graph[currentNode.Node()][i];
-                if (newdist < Dijkstra[i].getDistnace()) {
+                if (newdist < Dijkstra[i].getDistance()) {
                     Dijkstra[i].newDistance(newdist);
                     if (!visited[i]) {
                         priorityQueue.add(Dijkstra[i]);
