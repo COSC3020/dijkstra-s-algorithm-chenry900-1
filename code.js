@@ -17,7 +17,7 @@ function dijkstra(graph, sourceNode) {
       var next = -1;
       var iter = 0;
 
-      for (var i = 0; i < graph[current].length; i++) {
+      for (var i = 0; i < graph.length; i++) {
          if (visited[i] == false && distance[i] < min) {
             next = i;
             min = distance[i];
