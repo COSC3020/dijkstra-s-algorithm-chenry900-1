@@ -10,7 +10,6 @@ function dijkstra(graph, sourceNode) {
    }
 
    distance[sourceNode] = 0;
-   visited[sourceNode] = true;
 
    while(remaining) {
       var min = Infinity;
