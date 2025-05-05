@@ -1,75 +1,50 @@
-        
-class DijkstraNode {
-    constructor (node, distance) {
-        this.node = node;//it fixed the constructor and node by using this.node I then asked it to teach me how the this.something worked and implemented it in the rest of my code.
-        this.distance = distance;
-    }
-    Node() {
-        return this.node;
-    }
-    getDistance() {
-        return this.distance;
-    }
-    newDistance(dist) {
-        this.distance = dist;
-    }
-
-}
-
-class PriorityQueue {
-    constructor () {
-        this.queue = [];
-    }
-
-    add(dijkstraNode) {
-        this.queue.push(dijkstraNode);
-        this.queue.sort((a, b) => a.getDistance() - b.getDistance());
-    }
-    poll() {
-        return this.queue.shift();
-    }
-    isEmpty() {
-        return this.queue.length == 0;
-    }
-    
-
-}
-
 function dijkstra(graph, sourceNode) {
-    const inf = Infinity;
-    const Dijkstra = [];
-    const visited = [];
-    const priorityQueue = new PriorityQueue();
+   var distance = [];
+   var visited = [];
+   var remaining = true;
+   var current = sourceNode;
 
-    for (var i = 0; i < graph.length; i++) {
-        if (i == sourceNode){
-            Dijkstra[i] = new DijkstraNode(i, 0);
-            visited[i] = true;
-        }
-        else {
-            Dijkstra[i] = new DijkstraNode(i, inf);
-            visited[i] = false;
-        }
-    }
-    priorityQueue.add(Dijkstra[sourceNode]);
+   for (var i = 0; i < graph.length; i++) {
+      distance[i] = Infinity;
+      visited[i] = false;
+   }
 
-    while (!priorityQueue.isEmpty()) {
-        var currentNode = priorityQueue.poll();
-        for (var i = 0; i < graph.length; i++) {
-            if (graph[currentNode.Node()][i] > 0) {
-                var newdist = currentNode.getDistance() + graph[currentNode.Node()][i];
-                if (newdist < Dijkstra[i].getDistance()) {
-                    Dijkstra[i].newDistance(newdist);
-                    if (!visited[i]) {
-                        priorityQueue.add(Dijkstra[i]);
-                        visited[i] = true;
-                    }
-                }
+   distance[sourceNode] = 0;
+   visited[sourceNode] = true;
+
+   while(remaining) {
+      var min = Infinity;
+      var iter = 0;
+
+      for (var i = 0; i < graph[current].length; i++) {
+         if (visited[i] == false && distance[i] < min) {
+            current = i;
+            min = distance[i];
+         }
+      }
+
+      visited[current] = true;
+
+      for (var i = 0; i < graph[current].length; i++) {
+            var neighbor = graph[current][i][0];
+            var cost = graph[current][i][1];
+              
+            if (visited[neighbor] == false) {
+                distance[neighbor] = Math.min(distance[neighbor], (distance[current] + cost));
             }
-        }
-    }
-    return Dijkstra.map(node => node.getDistance()); //copilot helped me with this line
+      }
+           
+      for (var i = 0; i < graph.length; i ++) {
+            if (visited[i]) {
+                iter += 1;
+            }
+      }
+           
+      if (iter == graph.length) {
+            remaining = false;
+      }
+   }
+
+
+   return distance;     
 }
-
-
-module.exports = { dijkstra }; //copilot said i needed to add this at the bottom to get the test code working properly 
