@@ -14,15 +14,20 @@ function dijkstra(graph, sourceNode) {
 
    while(remaining) {
       var min = Infinity;
+      var next = -1;
       var iter = 0;
 
       for (var i = 0; i < graph[current].length; i++) {
          if (visited[i] == false && distance[i] < min) {
-            current = i;
+            next = i;
             min = distance[i];
          }
       }
-
+      
+      if (next == -1) {
+         break;
+      }
+      current = next;
       visited[current] = true;
 
       for (var i = 0; i < graph[current].length; i++) {
