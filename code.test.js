@@ -1,6 +1,7 @@
-const jsc = require('jsverify');
-const { dijkstra } = require('./code');
+const fs = require('fs');
+const assert = require('assert');
 
+eval(fs.readFileSync('code.js')+'');
 // Helper: creates a connected graph of size n with random weights between 1 and 10
 function randomGraph(n) {
     const graph = Array.from({ length: n }, () => Array(n).fill(0));
