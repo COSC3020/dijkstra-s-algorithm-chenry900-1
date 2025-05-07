@@ -1,49 +1,33 @@
+
 const fs = require('fs');
 const assert = require('assert');
 
-// Load the code.js file which contains the dijkstra function
-eval(fs.readFileSync('code.js') + '');
+eval(fs.readFileSync('code.js')+'');
 
-// === Test 1: Single node ===
-let graph = [[]]; // No edges
-let result = dijkstra(graph, 0);
-assert.deepStrictEqual(result, [0]);
+//Graph with one node
+assert.deepStrictEqual(dijkstra([[]], 0), [0], "Failed on ([[]], 0)");
 
-// === Test 2: Two connected nodes ===
-graph = [
-  [[1, 5]],
-  [[0, 5]]
-];
-result = dijkstra(graph, 0);
-assert.deepStrictEqual(result, [0, 5]);
+//Basic graph
+assert.deepStrictEqual(dijkstra([[[1, 50]], []], 0), [0, 50], "Failed on ([[[1, 50]], []], 0)");
 
-// === Test 3: Triangle graph ===
-graph = [
-  [[1, 2], [2, 4]],
-  [[0, 2], [2, 1]],
-  [[0, 4], [1, 1]]
-];
-result = dijkstra(graph, 0);
-assert.deepStrictEqual(result, [0, 2, 3]); // 0→1→2 gives 3
+//Basic graph with different start node
+assert.deepStrictEqual(dijkstra([[[1, 50]], []], 1), [Infinity, 0], "Failed on ([[[1, 50]], []], 1)");
 
-// === Test 4: Disconnected node ===
-graph = [
-  [[1, 1]],
-  [[0, 1]],
-  []  // Node 2 is unreachable
-];
-result = dijkstra(graph, 0);
-assert.deepStrictEqual(result, [0, 1, Infinity]);
+//Slightly more complex graph generated through https://visualgo.net/en/graphds
+var graph = [[[1,100], [2,50]], [[2,50], [3,50], [4,50]], [[3,100]], [[4,75]], []]
+var dist = [0, 100, 50, 150, 150];
+assert.deepStrictEqual(dijkstra(graph, 0), dist, "Failed on generated graph");
 
-// === Test 5: More complex graph (from TSP example style) ===
-graph = [
-  [[1, 3], [2, 4], [3, 2], [4, 7]],
-  [[0, 3], [2, 4], [3, 6], [4, 3]],
-  [[0, 4], [1, 4], [3, 5], [4, 8]],
-  [[0, 2], [1, 6], [2, 5], [4, 6]],
-  [[0, 7], [1, 3], [2, 8], [3, 6]]
-];
-result = dijkstra(graph, 0);
-assert.deepStrictEqual(result, [0, 3, 4, 2, 6]);
+//Graph based on slide 38
+graph = [[[1, 2], [2, 1], [3, 4]], 
+        [[2, 1], [4, 10], [5, 2]], 
+        [[0, 9], [4, 8]], 
+        [[2, 2]], 
+        [[3, 7], [6, 1]], 
+        [[7, 3]],
+        [[4, 4], [5, 2]],
+        [[6, 1]]];
 
-console.log('✅ All Dijkstra tests passed!');
+//Solution from lecture video
+dist = [9, 11, 0, 13, 8, 11, 9, 14]
+assert.deepStrictEqual(dijkstra(graph, 2), dist, "Failed on graph from slides");
