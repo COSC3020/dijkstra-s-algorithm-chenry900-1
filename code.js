@@ -30,8 +30,8 @@ function dijkstra(graph, sourceNode) {
       visited[current] = true;
 
       for (var i = 0; i < graph[current].length; i++) {
-            var neighbor = graph[current][i][0];
-            var cost = graph[current][i][1];
+            var neighbor = graph[current][i][0];//when debugging copilot added the last [0]
+            var cost = graph[current][i][1];//when debugging copilot added the last [1]
               
             if (visited[neighbor] == false) {
                 distance[neighbor] = Math.min(distance[neighbor], (distance[current] + cost));
