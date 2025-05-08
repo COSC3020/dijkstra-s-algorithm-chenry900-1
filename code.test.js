@@ -4,24 +4,30 @@ const assert = require('assert');
 
 eval(fs.readFileSync('code.js')+'');
 
-var g =  [
-    [0, 3, 0, 0],
-    [3, 0, 2, 0],
-    [0, 2, 0, 1],
-    [0, 0, 1, 0]
-];
-assert(JSON.stringify(dijkstra(g,0)) == JSON.stringify([0, 3, 5, 6]));
-assert(JSON.stringify(dijkstra(g,2)) == JSON.stringify([5, 2, 0, 1]));
+//Graph with one node
+assert.deepStrictEqual(dijkstra([[]], 0), [0], "Failed on ([[]], 0)");
 
+//Basic graph
+assert.deepStrictEqual(dijkstra([[[1, 50]], []], 0), [0, 50], "Failed on ([[[1, 50]], []], 0)");
 
-var g = [
-    [0, 5, 0, 8, 0],
-    [5, 0, 1, 0, 0],
-    [0, 1, 0, 2, 3],
-    [8, 0, 2, 0, 4],
-    [0, 0, 3, 4, 0]
-];
+//Basic graph with different start node
+assert.deepStrictEqual(dijkstra([[[1, 50]], []], 1), [Infinity, 0], "Failed on ([[[1, 50]], []], 1)");
 
-assert(JSON.stringify(dijkstra(g,2)) == JSON.stringify([6, 1, 0, 2, 3]));
-assert(JSON.stringify(dijkstra(g,3)) == JSON.stringify([8, 3, 2, 0, 4]));
-assert(JSON.stringify(dijkstra(g,4)) == JSON.stringify([9, 4, 3, 4, 0]));
+//Slightly more complex graph generated through https://visualgo.net/en/graphds
+var graph = [[[1,100], [2,50]], [[2,50], [3,50], [4,50]], [[3,100]], [[4,75]], []]
+var dist = [0, 100, 50, 150, 150];
+assert.deepStrictEqual(dijkstra(graph, 0), dist, "Failed on generated graph");
+
+//Graph based on slide 38
+graph = [[1, 2, 2, 1, 3, 4], 
+        [2, 1, 4, 10, 5, 2], 
+        [0, 9, 4, 8], 
+        [2, 2], 
+        [3, 7, 6, 1], 
+        [7, 3],
+        [4, 4, 5, 2],
+        [6, 1]];
+
+//Solution from lecture video
+dist = [9, 11, 0, 13, 8, 11, 9, 14]
+assert.deepStrictEqual(dijkstra(graph, 2), dist, "Failed on graph from slides");
