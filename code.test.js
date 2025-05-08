@@ -19,14 +19,14 @@ var dist = [0, 100, 50, 150, 150];
 assert.deepStrictEqual(dijkstra(graph, 0), dist, "Failed on generated graph");
 
 //Graph based on slide 38
-graph = [[1, 2, 2, 1, 3, 4], 
-        [2, 1, 4, 10, 5, 2], 
-        [0, 9, 4, 8], 
-        [2, 2], 
-        [3, 7, 6, 1], 
-        [7, 3],
-        [4, 4, 5, 2],
-        [6, 1]];
+graph = [[[1, 2], [2, 1], [3, 4]], 
+        [[2, 1], [4, 10], [5, 2]], 
+        [[0, 9], [4, 8]], 
+        [[2, 2]], 
+        [[3, 7], [6, 1]], 
+        [[7, 3]],
+        [[4, 4], [5, 2]],
+        [[6, 1]]];
 
 //Solution from lecture video
 dist = [9, 11, 0, 13, 8, 11, 9, 14]
